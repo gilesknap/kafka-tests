@@ -43,8 +43,9 @@ dbLoadRecords(iocGui.db, "name=DEV, EDM_FILE=ioc_stats_softdls.edl, IOC=BL45P-EA
 # ------------------------
 iocInit
 
-dbpf "BL45P-EA-AND-01:KFK:KafkaMaxQueueSize", "50"
+dbpf "BL45P-EA-AND-01:KFK:KafkaMaxQueueSize", "55"
 
 dbpf "BL45P-EA-AND-01:CAM:ImageMode",  "Multiple"
 dbpf "BL45P-EA-AND-01:CAM:NumImages", "1000"
-dbpf "BL45P-EA-AND-01:CAM:AcquirePeriod", ".05"
+dbpf "BL45P-EA-AND-01:CAM:AcquirePeriod", ".06"
+

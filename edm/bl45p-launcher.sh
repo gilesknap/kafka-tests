@@ -10,7 +10,7 @@ export EPICS_CA_ADDR_LIST=${EPICS_CA_ADDR_LIST:- 172.23.59.64}
 
 if [ ! -z $(which edm 2>  /dev/null) ]
 then
-    export EDMDATAFILES=$(echo $EDMDATAFILES | sed s-/screens-${thisdir}-g)
+    export EDMDATAFILES=$(echo $EDMDATAFILES | sed s~/screens~${thisdir}~g)
     edm -noedit -x ${start}
     exit 0
 fi

@@ -33,6 +33,7 @@ else
 
     . ${k8sdir}/kube-functions.sh
 
+    kubectl version
 fi
 
 # guess which IP addresses the IOCs will run on (wont be required when networkHost enabled pods are in the same subnet on a beamline)
