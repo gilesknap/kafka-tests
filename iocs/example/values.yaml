@@ -1,0 +1,14 @@
+beamline: blxxi
+namespace: epics-iocs
+base_image: ghcr.io/epics-containers/ioc-adsimdetector:2.10r3.0
+
+# root folder of generic ioc source - not expected to change
+iocFolder: /epics/ioc
+
+# when autosave is true: create PVC and mount at /autosave
+autosave: false
+# when useAffinity is true: only run on nodes with label beamline:blxxi
+useAffinity: false
+# resource limits
+memory: 2048Mi
+cpu: 4

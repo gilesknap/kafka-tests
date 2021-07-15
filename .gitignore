@@ -1,0 +1,4 @@
+*.tz
+*.tgz
+.history
+**/Chart.lock
