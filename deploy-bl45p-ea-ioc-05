@@ -1,0 +1,5 @@
+#!/bin/bash
+
+helm dependency update iocs/bl45p-ea-ioc-05
+helm upgrade -i bl45p-ea-ioc-05 iocs/bl45p-ea-ioc-05
+
