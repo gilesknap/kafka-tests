@@ -1,0 +1,5 @@
+#!/bin/bash
+
+thisdir=$(realpath $(dirname ${BASH_SOURCE[0]}))
+
+${thisdir}/iocs/ioc-launch.sh bl45p-ea-ioc-05
