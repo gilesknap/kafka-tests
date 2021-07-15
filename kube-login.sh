@@ -9,7 +9,7 @@
 
 export k8sdir=$(realpath $(dirname ${BASH_SOURCE[0]}))
 
-if [ ! -f /dls_sw/work ] ; then
+if [ ! -d /dls_sw/work ] ; then
     echo "this login script is for use at DLS only"
     exit 1
 else
