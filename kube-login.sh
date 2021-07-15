@@ -12,25 +12,28 @@ export k8sdir=$(realpath $(dirname ${BASH_SOURCE[0]}))
 if [ ! -f /dls_sw/work ] ; then
     echo "this login script is for use at DLS only"
     exit 1
+else
+
+    if [  "$0" == "${BASH_SOURCE[0]}" ]
+    then
+    echo "you must source this script for it to work correctly"
+    exit 1
+    fi
+
+    module load argus
+    module load gcloud
+
+    if [ -z "$(which docker 2> /dev/null)" ]
+    then
+        shopt -s expand_aliases
+        alias docker='podman'
+    fi
+
+    export K8S_HELM_REGISTRY=oci://ghcr.io/epics-containers
+
+    . ${k8sdir}/kube-functions.sh
+
 fi
-
-if [  "$0" == "${BASH_SOURCE[0]}" ]
-then
-  echo "you must source this script for it to work correctly"
-  exit 1
-fi
-
-module load argus
-module load gcloud
-
-if [ -z "$(which docker 2> /dev/null)" ]
-then
-    shopt -s expand_aliases
-    alias docker='podman'
-fi
-
-. ${k8sdir}/kube-functions.sh
-
 
 # guess which IP addresses the IOCs will run on (wont be required when networkHost enabled pods are in the same subnet on a beamline)
 # export EPICS_CA_ADDR_LIST="172.23.168.2 172.23.168.3 172.23.168.4 172.23.168.5 172.23.168.6 172.23.168.7 172.23.168.8 172.23.168.9 172.23.168.10 172.23.168.11 172.23.168.12 172.23.168.13 172.23.168.14 172.23.168.15 172.23.168.16 172.23.168.17 172.23.168.18 172.23.168.19 172.23.168.20 172.23.168.21 172.23.168.22"
