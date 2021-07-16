@@ -151,7 +151,7 @@ For consumer:
 ```
 ./launch-test-consumer.sh
 # this gives you a command promt in the consumer pod - now run
-kafka-consumer-perf-test.sh  --bootstrap-server=cs05r-sc-cloud-19:30016 --timeout 60000 --group test-group --topic test3 --messages 100
+kafka-consumer-perf-test.sh  --bootstrap-server=cs05r-sc-cloud-19:30016 --timeout 60000 --group test-group --topic and_topic --messages 100
 # and change topic and messages count as needed
 ```
 
@@ -159,7 +159,7 @@ For producer:
 ```
 ./launch-test-producer.sh
 
-kafka-producer-perf-test.sh --producer-props bootstrap.servers=cs05r-sc-cloud-19:30016 max.request.size=200000000 --topic test3 --throughput -1 --num-records 100 --record-size 1443200
+kafka-producer-perf-test.sh --producer-props bootstrap.servers=cs05r-sc-cloud-19:30016 max.request.size=200000000 --topic and_topic --throughput -1 --num-records 100 --record-size 1443200
 # and change topic, num-records and record-size accordingly
 
 ```
