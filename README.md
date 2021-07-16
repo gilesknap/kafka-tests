@@ -2,8 +2,7 @@
 
 ## Initial setup
 First get connected to the argus cluster. This will ask you for your fedID and
-password the first time:
-
+password the first time (and occasionally when the cached creds time out).
 
 
 ```
@@ -22,7 +21,7 @@ To Deploy into your own namespace in the argus Kubernetes cluster:
 ```
 ./deploy-bl45p-ea-ioc-05
 ```
-
+## Check the status of your 'beamline' or list resou
 ## Modify the IOC
 
 The IOC runs in a container and is entirely defined in its startup script
@@ -32,7 +31,7 @@ Edit this file as required and redeploy with the above command.
 
 You may then need to restart the IOC with:
 ```
-k8s-ioc list bl45p-ea-ioc-05
+k8s-ioc restart bl45p-ea-ioc-05
 ```
 
 ## Explore the available IOC commands
@@ -111,10 +110,20 @@ performance testing consumer or producer
 
 For useful commands see https://github.com/dls-controls/dls-kafka
 
+For consumer:
+
 ```
 ./launch-test-consumer.sh
+# this gives you a command promt in the consumer pod - now run
+kafka-consumer-perf-test.sh  --bootstrap-server=cs05r-sc-cloud-19:30016 --timeout 60000 --group test-group --topic test3 --messages 100
+# and change topic and messages count as needed
+```
 
-or
-
+For producer:
+```
 ./launch-test-producer.sh
+
+kafka-producer-perf-test.sh --producer-props bootstrap.servers=cs05r-sc-cloud-19:30016 max.request.size=200000000 --topic test3 --throughput -1 --num-records 100 --record-size 1443200
+# and change topic, num-records and record-size accordingly
+
 ```
