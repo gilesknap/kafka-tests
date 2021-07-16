@@ -21,7 +21,18 @@ To Deploy into your own namespace in the argus Kubernetes cluster:
 ```
 ./deploy-bl45p-ea-ioc-05
 ```
-## Check the status of your 'beamline' or list resou
+## Check the status of your 'beamline' or list resources
+
+```
+# list every resource in the bl45p beamline
+k8s-ioc beamline bl45p
+
+# list your ioc's resources
+k8s-ioc list bl45p-ea-ioc-05
+
+```
+
+
 ## Modify the IOC
 
 The IOC runs in a container and is entirely defined in its startup script
@@ -92,18 +103,43 @@ bl45p-ea-ioc-05-69bb59bff6-bml9v   2021.2.0   <none>   0          2021-07-15T16:
 kubectl cp .  bl45p-ea-ioc-05-69bb59bff6-bml9v:/data/myfolder
 ```
 
-## contect to the IOC shell or to a bash shell in the IOC
+## Contect to the IOC shell
 
 ```
 # connect to ioc shell
 k8s-ioc attach bl45p-ea-ioc-05
+```
 
-# connect to a bash shell
+
+## Connect to a bash shell and run tests
+
+To connect to a bash shell in the container use this command.
+
+```
 k8s-ioc exec bl45p-ea-ioc-05
 
 ```
 
-## run up a kafka client pod
+The shell has limited capabilities but includes busybox which has many useful
+tools including vi. It is easiest to work outside of the container to work
+on test scripts and then use `kubectl cp` to copy your test script in.
+
+Use this command to get access to all busybox commands inside the container
+bash shell.
+
+```
+busybox sh
+help
+```
+
+Giles has provided a test script example_tiff_read.sh. However it does not
+work yet, the following error is returned when sending to TiffRead
+
+```
+BL45P-EA-AND-01:TIFF:WriteMessage Error  file /data/tiffs/example01.tiff, status=3
+```
+
+## Run up a kafka client pod
 
 These pods will allow you to configure topics and to run a command line
 performance testing consumer or producer
@@ -126,4 +162,10 @@ For producer:
 kafka-producer-perf-test.sh --producer-props bootstrap.servers=cs05r-sc-cloud-19:30016 max.request.size=200000000 --topic test3 --throughput -1 --num-records 100 --record-size 1443200
 # and change topic, num-records and record-size accordingly
 
+```
+
+## Remove all IOC resources including the PVC with your Data
+
+```
+k8s-ioc delete bl45p-ea-ioc-01
 ```
